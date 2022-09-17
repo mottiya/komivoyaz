@@ -95,13 +95,16 @@ class Komi {
 		friend std::ostream& operator<< (std::ostream &out, const Komi& K);	//вывод матрицы (в видее как в файле)
 		
 		size_t size() const { return sqrt(matrix.size()); };				// вернет размер матрицы
+		size_t get_high_limit() { return high_limit; };
+		size_t get_low_limit() { return low_limit; };
 
 		void del_rib(const pair<size_t, size_t>& rib);						//делает значение ребра rib = INT_MAX
 		void del_str_and_colum(const pair<size_t, size_t>& rib);			//удаляет строку и столбец, в которые входит ребро rib, size  уменьшается на 1
 		void early_cycle();													//делает del_rib всем ребрам приходящим с Path.find_reverse_cycle (обратные ребра преждевременного цикла)
 
-		void find_high_limit();
-		size_t get_high_limit() { return high_limit; };
+		void find_high_limit();												//записывает high_limit и ligh_path
+		void find_low_limit_normaliz();
+		void find_best_edges();
 };
 
 

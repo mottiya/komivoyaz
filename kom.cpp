@@ -22,9 +22,11 @@ int main() {
 	Komi K;
 	Komi K1(filename);
 	K.load_matrix(filename);
+	cout << K << endl;
 	K.find_high_limit();
+	K.find_low_limit_normaliz();
 
-	cout << K << endl << "high_limit = " << K.get_high_limit();
+	cout << K << endl << "high_limit = " << K.get_high_limit() << "low_limit = " << K.get_low_limit();
 
 	return 0;
 }
