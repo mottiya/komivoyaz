@@ -60,20 +60,23 @@ class Path{
 		void alloc(size_t N);
 		
 		void find_reverse_cycle(set<pair<size_t, size_t> >& edges) const;
+
+		friend std::ostream& operator<< (std::ostream& out, const Path& P);
 };
 
 class Komi {
 	private:
 		map< pair<size_t, size_t>, size_t> matrix;
 
-		int high_limit;
+		size_t high_limit;
 		Path high_path;
 		
-		int low_limit;
+		size_t low_limit;
 		Path low_path;
 
 		void push(pair<size_t, size_t> it, size_t p)
 			{ matrix.insert_or_assign(it, p); };							//добавить значение в матрицу(если есть ключ, заменить)
+
 
 		pair<pair<size_t, size_t>, size_t> find_min_map(map< pair<size_t, size_t>, size_t>& m) const;
 		map< pair<size_t, size_t>, size_t>& create_matrix_str(map< pair<size_t, size_t>, size_t>& m, size_t str) const;

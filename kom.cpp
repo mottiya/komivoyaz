@@ -24,7 +24,7 @@ int main() {
 	K.load_matrix(filename);
 	K.find_high_limit();
 
-	cout << K << endl << "high_limit = "; //<< K.get_high_limit();
+	cout << K << endl << "high_limit = " << K.get_high_limit();
 
 	return 0;
 }

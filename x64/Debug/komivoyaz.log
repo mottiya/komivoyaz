@@ -1,5 +1,3 @@
 ﻿  func.cpp
-D:\Progects\komivoiaz\komivoyaz\func.h(94,36): warning C4244: return: преобразование "double" в "size_t", возможна потеря данных
-D:\Progects\komivoiaz\komivoyaz\func.cpp(287,27): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
-D:\Progects\komivoiaz\komivoyaz\func.cpp(300,26): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Progects\komivoiaz\komivoyaz\func.h(97,36): warning C4244: return: преобразование "double" в "size_t", возможна потеря данных
   komivoyaz.vcxproj -> D:\Progects\komivoiaz\komivoyaz\x64\Debug\komivoyaz.exe

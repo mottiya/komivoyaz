@@ -139,6 +139,19 @@ void Path::find_reverse_cycle(set<pair<size_t, size_t> >& edges) const {
 	}
 };
 
+std::ostream& operator<<(std::ostream& out, const Path& P)
+{
+	out << "size: " << P.size << endl << "counts: ";
+	for (int i = 0; i < P.size; i++) {
+		size_t p = P.points[i];
+		if (p == INT_MAX) out << "-";
+		else out << p;
+		out << ", ";
+	}
+	out << ";\n";
+	return out;
+}
+
 //############################################################################################################
 //############################################################################################################
 //############################################################################################################
@@ -241,7 +254,8 @@ pair<pair<size_t, size_t>, size_t> Komi::find_min_map(map< pair<size_t, size_t>,
 			min_i = (*it).first.second;
 		}
 	}
-	return { { it->first.first, min_i }, min };
+	it--;
+	return { { (*it).first.first, min_i}, min};
 }
 
 void Komi::del_rib(const pair<size_t, size_t>& rib){
@@ -274,7 +288,7 @@ void Komi::early_cycle() {
 };
 
 void Komi::find_high_limit() {
-	high_path = Path(size());
+	high_path.alloc(size());
 	high_limit = 0;
 
 	map< pair<size_t, size_t>, size_t> buff;
@@ -282,19 +296,20 @@ void Komi::find_high_limit() {
 	pair<pair<size_t, size_t>, size_t> min_in_str;
 
 	for (size_t i = 0; i < size() - 1; i++) {
-		cout << i << " ";
 		min_in_str = find_min_map(buff);
 		high_limit += min_in_str.second;
 		high_path.set_rib(min_in_str.first);
 
 		create_matrix_str(buff, min_in_str.first.second);		//создание следующей строки
 		set<pair<size_t, size_t> > ribs;						//удаление обратных ребер в буфере
-		high_path.find_reverse_cycle(ribs);						//зависнет
+		high_path.find_reverse_cycle(ribs);
 		set<pair<size_t, size_t> >::iterator it = ribs.begin();
 		for (; it != ribs.end(); it++) {
 			buff.erase(*it);
 		}
 	}
+
+	
 
 	min_in_str = { { min_in_str.first.second, 0 }, matrix[{ min_in_str.first.second, 0 }]};
 	high_limit += min_in_str.second;
